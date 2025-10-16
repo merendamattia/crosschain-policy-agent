@@ -1,4 +1,4 @@
-name: 'Check Docker Image building'
+name: 'Docker Image build'
 
 on:
   pull_request:

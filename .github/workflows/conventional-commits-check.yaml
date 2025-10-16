@@ -1,4 +1,4 @@
-name: Conventional Commits Check
+name: 'Conventional Commits check'
 
 on:
   pull_request:
