@@ -1,3 +1,4 @@
+import argparse
 import json
 import logging
 import os
@@ -27,12 +28,34 @@ logger = logging.getLogger("policy_agent")
 
 
 # Configuration from environment
-PROMPT_FILE = os.getenv("PROMPT_FILE", "prompts/agent_prompt.md")
-TARGET_PATH = os.getenv("TARGET_PATH", "test/THORChain20210723/source-code")
-OUTPUT_FILE = os.getenv("OUTPUT_FILE", "output/results.json")
+PROMPT_FILE = os.getenv("PROMPT_FILE")
 
 
-def main():
+def main(argv: List[str] | None = None):
+    """Entry point for the CLI.
+
+    This function reads optional command-line flags to override the environment
+    configuration for the prompt file, the target folder containing `.sol` files,
+    and the output JSON path. If flags are not provided, environment variables
+    (or hard-coded defaults) are used.
+
+    Flags:
+        --target-path: Path to the folder with Solidity files to analyze.
+        --output-file: Path where the agent's resulting JSON will be written.
+    """
+    parser = argparse.ArgumentParser(description="Run the cross-chain policy agent")
+    parser.add_argument(
+        "--target-path",
+        required=True,
+        help="Path to folder containing .sol files (required)",
+    )
+    parser.add_argument(
+        "--output-file",
+        required=True,
+        help="Path to write JSON output (required)",
+    )
+    args = parser.parse_args(argv)
+
     # Load prompt
     try:
         prompt_text = Path(PROMPT_FILE).read_text()
@@ -43,11 +66,13 @@ def main():
             "Produce JSON with an array named 'policy'."
         )
 
-    client = GoogleClient(api_key=os.getenv("GOOGLE_API_KEY"))
+    client = GoogleClient(
+        api_key=os.getenv("GOOGLE_API_KEY"), model=os.getenv("GOOGLE_MODEL")
+    )
     runner = AgentRunner(
         prompt_text=prompt_text,
-        target_path=TARGET_PATH,
-        output_file=OUTPUT_FILE,
+        target_path=args.target_path,
+        output_file=args.output_file,
         client=client,
     )
     runner.run()

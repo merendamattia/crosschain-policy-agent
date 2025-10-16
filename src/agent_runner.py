@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 from datapizza.agents import Agent
 from datapizza.clients.google import GoogleClient
-from datapizza.clients.openai_like import OpenAILikeClient
+from datapizza.tracing import ContextTracing
 
 from .formatter import format_policy_json
 from .tools import list_sol_files, read_sol_file
@@ -90,12 +90,14 @@ class AgentRunner:
         )
         combined = self.build_combined_prompt()
         logger.info("Running agent with prompt length: %d", len(combined))
-        res = agent.run(combined)
-        # post-process
-        out = format_policy_json(res.text)
-        # write output
-        out_path = Path(self.output_file)
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(json.dumps(out, indent=2))
-        logger.info("Wrote results to %s", out_path)
-        return out
+
+        with ContextTracing().trace("my_ai_operation"):
+            res = agent.run(combined)
+            # post-process
+            out = format_policy_json(res.text)
+            # write output
+            out_path = Path(self.output_file)
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(json.dumps(out, indent=2))
+            logger.info("Wrote results to %s", out_path)
+            return out
