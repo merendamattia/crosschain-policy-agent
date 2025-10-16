@@ -59,10 +59,18 @@ def main(argv: List[str] | None = None):
     args = parser.parse_args(argv)
 
     # Load prompt
-    try:
-        prompt_text = Path(PROMPT_FILE).read_text()
-        logger.info("Loaded prompt from %s (length %d)", PROMPT_FILE, len(prompt_text))
-    except Exception:
+    if PROMPT_FILE:
+        try:
+            prompt_text = Path(PROMPT_FILE).read_text()
+            logger.info(
+                "Loaded prompt from %s (length %d)", PROMPT_FILE, len(prompt_text)
+            )
+        except Exception:
+            prompt_text = (
+                "You are an assistant that extracts cross-chain policy recommendations from Solidity source code. "
+                "Produce JSON with an array named 'policy'."
+            )
+    else:
         prompt_text = (
             "You are an assistant that extracts cross-chain policy recommendations from Solidity source code. "
             "Produce JSON with an array named 'policy'."
