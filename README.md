@@ -4,11 +4,11 @@ _A tool to extract cross-chain policies from Solidity contracts._
 
 This project scans a folder containing Solidity (`.sol`) files, uses a language model (via [Datapizza](https://github.com/datapizza-labs/datapizza-ai) clients) to analyze the code, and produces a canonical JSON representation of cross-chain policy mappings.
 
-Repository contents:
-
-- a Datapizza-based agent that queries an LLM;
-- local utilities to read and normalize Solidity sources (`src/tools.py`, `src/formatter.py`);
-- a post-processor that converts the model output into a stable JSON schema (`src/agent_runner.py`, `src/app.py`).
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Latest Release](https://img.shields.io/github/v/release/merendamattia/crosschain-policy-agent?label=release)](https://github.com/merendamattia/crosschain-policy-agent/releases)
+[![Actions Status](https://github.com/merendamattia/crosschain-policy-agent/actions/workflows/check-docker-image.yaml/badge.svg)](https://github.com/merendamattia/crosschain-policy-agent/actions)
+[![Actions Status](https://github.com/merendamattia/crosschain-policy-agent/actions/workflows/conventional-commits-check.yaml/badge.svg)](https://github.com/merendamattia/crosschain-policy-agent/actions)
+[![Actions Status](https://github.com/merendamattia/crosschain-policy-agent/actions/workflows/python-unit-tests.yaml/badge.svg)](https://github.com/merendamattia/crosschain-policy-agent/actions)
 
 ## Key features
 
@@ -18,7 +18,7 @@ Repository contents:
 
 ## Requirements
 
-- Python 3.10+ (recommended)
+- Python 3.11+ (recommended)
 - Virtual environment (venv) or similar
 - Environment variables for any external APIs used (see `.env`)
 
