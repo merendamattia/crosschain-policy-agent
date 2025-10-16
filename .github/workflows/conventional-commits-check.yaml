@@ -1,10 +1,10 @@
-name: Conventional Commits Check
+name: 'Conventional Commits check'
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
   push:
-    branches: [main, master]
+    branches: [main, master, develop]
 
 jobs:
   conventional-commits:

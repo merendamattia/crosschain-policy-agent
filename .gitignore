@@ -1,0 +1,8 @@
+.env
+analyzer_output/
+__pycache__/
+.pytest_cache/
+*.pyc
+dist/
+build/
+output
