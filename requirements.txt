@@ -1,3 +1,4 @@
 pre-commit==4.2.0
 datapizza-ai==0.0.2
 datapizza-ai-clients-google==0.0.2
+pytest>=7.0.0
