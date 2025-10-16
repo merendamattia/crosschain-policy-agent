@@ -80,8 +80,6 @@ class AgentRunner:
             Any exceptions raised by the underlying Datapizza client or I/O operations
             will propagate to the caller.
         """
-        # Only pass datapizza-decorated tools to the Agent. format_policy_json is a local
-        # post-processor and should not be registered as a tool.
         agent = Agent(
             name="policy_agent",
             system_prompt=self.prompt_text,

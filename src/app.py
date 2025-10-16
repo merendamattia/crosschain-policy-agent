@@ -29,6 +29,7 @@ logger = logging.getLogger("policy_agent")
 
 # Configuration from environment
 PROMPT_FILE = os.getenv("PROMPT_FILE")
+OUTPUT_FILE_DEFAULT = os.getenv("OUTPUT_FILE")
 
 
 def main(argv: List[str] | None = None):
@@ -51,8 +52,9 @@ def main(argv: List[str] | None = None):
     )
     parser.add_argument(
         "--output-file",
-        required=True,
-        help="Path to write JSON output (required)",
+        required=False,
+        default=OUTPUT_FILE_DEFAULT,
+        help=f"Path to write JSON output (default: {OUTPUT_FILE_DEFAULT})",
     )
     args = parser.parse_args(argv)
 
