@@ -11,10 +11,10 @@ if __name__ == "__main__" and __package__ is None:
     repo_root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(repo_root))
 
-from datapizza.clients.google import GoogleClient
 from dotenv import load_dotenv
 
 from src.agent_runner import AgentRunner
+from src.clients import get_client
 
 load_dotenv()
 
@@ -51,6 +51,12 @@ def main(argv: List[str] | None = None):
         help="Path to folder containing .sol files (required)",
     )
     parser.add_argument(
+        "--client",
+        required=True,
+        choices=["google", "openai"],
+        help="Which LLM client to use (required): 'google' or 'openai'",
+    )
+    parser.add_argument(
         "--output-file",
         required=False,
         default=OUTPUT_FILE_DEFAULT,
@@ -75,10 +81,14 @@ def main(argv: List[str] | None = None):
             "You are an assistant that extracts cross-chain policy recommendations from Solidity source code. "
             "Produce JSON with an array named 'policy'."
         )
-
-    client = GoogleClient(
-        api_key=os.getenv("GOOGLE_API_KEY"), model=os.getenv("GOOGLE_MODEL")
-    )
+    # Select client implementation using the client registry/factory
+    try:
+        client = get_client(args.client)
+    except KeyError as ke:
+        raise RuntimeError(str(ke)) from ke
+    except Exception:
+        # Provide a helpful hint for optional dependencies (e.g. openai client)
+        raise
     runner = AgentRunner(
         prompt_text=prompt_text,
         target_path=args.target_path,
