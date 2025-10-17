@@ -69,10 +69,10 @@ Useful options:
 
 You can run the agent inside Docker to avoid installing dependencies locally.
 
-1. Build the image:
+1. Pull the published image from Docker Hub:
 
 ```bash
-docker build -t crosschain-agent:latest .
+docker pull merendamattia/crosschain-policy-agent:latest
 ```
 
 2. Run the container (example mounting `sol` and outputting to `output`):
@@ -82,13 +82,13 @@ docker run --rm \
   --env-file .env \
   -v "$(pwd)/sol:/data/sol" \
   -v "$(pwd)/output:/app/output" \
-  crosschain-agent:latest \
+  merendamattia/crosschain-policy-agent:latest \
   --client google \
   --target-path /data/sol \
   --output-file /app/output/policy.json
 ```
 
-Make sure to supply the `.env` with any required API keys.
+> Make sure to supply the `.env` with any required API keys.
 
 ## Output format
 
