@@ -72,7 +72,7 @@ You can run the agent inside Docker to avoid installing dependencies locally.
 1. Pull the published image from Docker Hub:
 
 ```bash
-docker pull merendamattia/crosschain-policy-agent:latest
+docker pull merendamattia/crosschain-policy-agent:<version>
 ```
 
 2. Run the container (example mounting `sol` and outputting to `output`):
@@ -82,7 +82,7 @@ docker run --rm \
   --env-file .env \
   -v "$(pwd)/sol:/data/sol" \
   -v "$(pwd)/output:/app/output" \
-  merendamattia/crosschain-policy-agent:latest \
+  merendamattia/crosschain-policy-agent:<version> \
   --client google \
   --target-path /data/sol \
   --output-file /app/output/policy.json
