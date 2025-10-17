@@ -43,6 +43,7 @@ def main(argv: List[str] | None = None):
     Flags:
         --target-path: Path to the folder with Solidity files to analyze.
         --output-file: Path where the agent's resulting JSON will be written.
+        --client: Which LLM client to use.
     """
     parser = argparse.ArgumentParser(description="Run the cross-chain policy agent")
     parser.add_argument(
