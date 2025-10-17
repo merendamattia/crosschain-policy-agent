@@ -86,9 +86,7 @@ def main(argv: List[str] | None = None):
         client = get_client(args.client)
     except KeyError as ke:
         raise RuntimeError(str(ke)) from ke
-    except Exception:
-        # Provide a helpful hint for optional dependencies (e.g. openai client)
-        raise
+
     runner = AgentRunner(
         prompt_text=prompt_text,
         target_path=args.target_path,
