@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.2.0...v1.2.1) (2025-10-17)
+
+
+### Bug Fixes
+
+* update Docker build context to use current directory ([ee1b626](https://github.com/merendamattia/crosschain-policy-agent/commit/ee1b626e7a6137146322a28d7f444e994854df8e))
+
 # [1.2.0](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.1.1...v1.2.0) (2025-10-17)
 
 
