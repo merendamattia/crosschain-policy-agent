@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.0.0...v1.1.0) (2025-10-17)
+
+
+### Bug Fixes
+
+* remove unnecessary exception handling in main function ([acc126e](https://github.com/merendamattia/crosschain-policy-agent/commit/acc126e96657e5f407de578c8d3ff42e82078ec1))
+
+
+### Features
+
+* implement client registry for LLM providers and update app to use it ([49e4f1f](https://github.com/merendamattia/crosschain-policy-agent/commit/49e4f1fc440615593fc025e8d27f14243ac19d43))
+
 # 1.0.0 (2025-10-16)
 
 
