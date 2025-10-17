@@ -42,7 +42,16 @@ def _merge_policies(policies: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             entry["sourceFunction"]["events"] = list(dict.fromkeys(src_events))
             merged[key] = entry
 
-    return list(merged.values())
+    # After merging, filter out entries where the sourceFunction has no events.
+    result = list(merged.values())
+    filtered = []
+    for entry in result:
+        src_events = entry.get("sourceFunction", {}).get("events") or []
+        # Keep only entries that have at least one non-empty event name
+        if any(ev for ev in src_events):
+            filtered.append(entry)
+
+    return filtered
 
 
 def format_policy_json(raw_text: str) -> Dict[str, Any]:

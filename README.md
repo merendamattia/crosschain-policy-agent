@@ -48,7 +48,7 @@ Edit `.env` to set required API keys (e.g., `GOOGLE_API_KEY`).
 
 > Note: the stronger the model, the higher the quality.
 
-Set `GOOGLE_MODEL` in `.env` (e.g., `gemini-2.0-flash`) based on your quality/cost/latency trade-offs.
+Set models in `.env` (e.g., `GOOGLE_MODEL=gemini-2.0-flash`) based on your quality/cost/latency trade-offs.
 
 ## Usage (CLI)
 
@@ -62,6 +62,7 @@ Useful options:
 
 - `--target-path`: directory containing `.sol` files to analyze.
 - `--output-file`: destination JSON file.
+- `--client`: LLM client to use.
 
 
 ## Running with Docker
@@ -82,6 +83,7 @@ docker run --rm \
   -v "$(pwd)/sol:/data/sol" \
   -v "$(pwd)/output:/app/output" \
   crosschain-agent:latest \
+  --client google \
   --target-path /data/sol \
   --output-file /app/output/policy.json
 ```
