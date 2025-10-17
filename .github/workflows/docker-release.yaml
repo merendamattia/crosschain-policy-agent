@@ -64,6 +64,5 @@ jobs:
           TAG: ${{ steps.determine_tag.outputs.tag }}
         run: |
           echo "Building $DOCKERHUB_REPO:$TAG"
-          # Dockerfile is in the docker/ subfolder; use that as build context
-          docker build -f docker/Dockerfile -t "$DOCKERHUB_REPO:$TAG" docker/
+          docker build -t "$DOCKERHUB_REPO:$TAG" .
           docker push "$DOCKERHUB_REPO:$TAG"
