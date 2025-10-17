@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.1.0...v1.1.1) (2025-10-17)
+
+
+### Bug Fixes
+
+* filter out policies with no events after merging ([26a642a](https://github.com/merendamattia/crosschain-policy-agent/commit/26a642af7f3af70566cf5d47cb937b2f6c056236))
+
 # [1.1.0](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.0.0...v1.1.0) (2025-10-17)
 
 
