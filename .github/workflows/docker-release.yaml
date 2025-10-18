@@ -58,11 +58,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        env:
-          DOCKERHUB_REPO: ${{ env.DOCKERHUB_REPO }}
-          TAG: ${{ steps.determine_tag.outputs.tag }}
-        run: |
-          echo "Building $DOCKERHUB_REPO:$TAG"
-          docker build -t "$DOCKERHUB_REPO:$TAG" .
-          docker push "$DOCKERHUB_REPO:$TAG"
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push multi-arch image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_REPO }}:${{ steps.determine_tag.outputs.tag }}
+            ${{ env.DOCKERHUB_REPO }}:latest
