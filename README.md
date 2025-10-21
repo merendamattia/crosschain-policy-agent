@@ -60,7 +60,7 @@ To use Ollama with local models, you need to:
 4. Configure environment variables in `.env`:
 
 ```bash
-OLLAMA_MODEL=gemma2:2b
+OLLAMA_MODEL=deepseek-r1:1.5b
 OLLAMA_URL=http://localhost:11434/v1
 ```
 
