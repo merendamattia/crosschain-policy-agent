@@ -54,8 +54,8 @@ def main(argv: List[str] | None = None):
     parser.add_argument(
         "--client",
         required=True,
-        choices=["google", "openai"],
-        help="Which LLM client to use (required): 'google' or 'openai'",
+        choices=["google", "openai", "ollama"],
+        help="Which LLM client to use (required): 'google', 'openai', or 'ollama'",
     )
     parser.add_argument(
         "--output-file",

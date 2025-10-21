@@ -44,25 +44,44 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit `.env` to set required API keys (e.g., `GOOGLE_API_KEY`).
+Edit `.env` to set required API keys and/or configure Ollama.
 
 > Note: the stronger the model, the higher the quality.
 
 Set models in `.env` (e.g., `GOOGLE_MODEL=gemini-2.0-flash`) based on your quality/cost/latency trade-offs.
+
+### Using Ollama (local models)
+
+To use Ollama with local models, you need to:
+
+1. Install Ollama: Download and install from [ollama.com](https://ollama.com/) for your operating system.
+2. Start the Ollama server.
+3. Pull a model that supports function [tools](https://ollama.com/search?c=tools).
+4. Configure environment variables in `.env`:
+
+```bash
+OLLAMA_MODEL=deepseek-r1:1.5b
+OLLAMA_URL=http://localhost:11434/v1
+```
+
+5. Then, run the agent with `--client ollama`.
 
 ## Usage (CLI)
 
 Minimum required flags: a target path with Solidity files and an output JSON file.
 
 ```bash
-python3 src/app.py --target-path /path/to/sol --output-file /path/to/out/policy.json
+python3 src/app.py \
+  --target-path /path/to/sol \
+  --output-file /path/to/out/policy.json \
+  --client <client>
 ```
 
 Useful options:
 
 - `--target-path`: directory containing `.sol` files to analyze.
 - `--output-file`: destination JSON file.
-- `--client`: LLM client to use.
+- `--client`: LLM client to use (`google`, `openai`, or `ollama`).
 
 
 ## Running with Docker
@@ -72,7 +91,7 @@ You can run the agent inside Docker to avoid installing dependencies locally.
 1. Pull the published image from Docker Hub:
 
 ```bash
-docker pull merendamattia/crosschain-policy-agent:<version>
+docker pull merendamattia/crosschain-policy-agent:latest
 ```
 
 2. Run the container (example mounting `sol` and outputting to `output`):
@@ -82,7 +101,7 @@ docker run --rm \
   --env-file .env \
   -v "$(pwd)/sol:/data/sol" \
   -v "$(pwd)/output:/app/output" \
-  merendamattia/crosschain-policy-agent:<version> \
+  merendamattia/crosschain-policy-agent:latest \
   --client google \
   --target-path /data/sol \
   --output-file /app/output/policy.json
