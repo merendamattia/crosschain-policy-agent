@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.2.1...v1.3.0) (2025-10-21)
+
+
+### Features
+
+* add support for Ollama client ([7c34670](https://github.com/merendamattia/crosschain-policy-agent/commit/7c34670c173e19f718df73a2a28ced41b181f35d))
+
 ## [1.2.1](https://github.com/merendamattia/crosschain-policy-agent/compare/v1.2.0...v1.2.1) (2025-10-17)
 
 
